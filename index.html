@@ -1,0 +1,24 @@
+<html>
+  <body>
+  <script>
+
+    let myWorker = new Worker("worker.js");
+
+    myWorker.onmessage = function(e) {
+      document.querySelector('#results').textContent = e.data;
+      console.log('Message received from worker');
+    }
+
+    document.addEventListener('DOMContentLoaded', function(){
+      document.querySelector('button').addEventListener('click', function(){
+        myWorker.postMessage(40);
+        console.log('Message posted to worker');
+      });
+    });
+  </script>
+
+  <button>Post message to worker</button>
+  <hr>
+  <div id="results">…</div>
+  </body>
+</html>
